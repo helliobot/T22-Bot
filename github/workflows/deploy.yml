@@ -1,0 +1,15 @@
+name: Deploy T22 Bot
+on: [push]
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-python@v2
+      with:
+        python-version: 3.12
+    - run: pip install -r requirements.txt
+    - name: Deploy
+      run: python main.py
+      env:
+        TELEGRAM_TOKEN: ${{ secrets.TOKEN }}
